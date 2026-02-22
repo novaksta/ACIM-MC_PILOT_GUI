@@ -1,0 +1,936 @@
+[
+{
+    "Version" : "1.1"
+},
+{
+    "Id" : 1,
+    "Name" : "STATUS",
+    "Description" : "Motor control subsystem State",
+    "Type" : "U8ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RP",
+    "UpdateFrequency": "MediumFreq",
+    "Enum" : [
+                "IDLE",
+                "IDLE_ALIGNMENT",
+                "ALIGNMENT",
+                "IDLE_START",
+                "START",
+                "START_RUN",
+                "RUN",
+                "ANY_STOP",
+                "STOP",
+                "STOP_IDLE",
+                "FAULT_NOW",
+                "FAULT_OVER",
+                "ICLWAIT",
+                "ALIGN_CHARGE_BOOT_CAP",
+                "ALIGN_OFFSET_CALIB",
+                "ALIGN_CLEAR",
+                "CHARGE_BOOT_CAP",
+                "OFFSET_CALIB",
+                "CLEAR",
+                "SWITCH_OVER",
+                "WAIT_STOP_MOTOR"
+            ]
+}
+,
+{
+    "Id" : 2,
+    "Name" : "CONTROL_MODE",
+    "Description" : "Control mode",
+    "Type" : "U8ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "OBSERVING",
+                "OPEN_LOOP_VOLTAGE",
+                "OPEN_LOOP_CURRENT",
+                "SPEED",
+                "TORQUE",
+                "PROFILING",
+                "SHORTED",
+                "POSITION_CTRL"
+             ]
+}
+,
+{
+    "Id" : 2,
+    "Name" : "SPEED_KP",
+    "Description" : "Speed PID regulator K_P parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16A/ppm",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 3,
+    "Name" : "SPEED_KI",
+    "Description" : "Speed PID regulator K_I parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16A",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 4,
+    "Name" : "SPEED_KD",
+    "Description" : "Speed PID regulator K_D parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16A/ppm2",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 6,
+    "Name" : "I_Q_KP",
+    "Description" : "I_q (Torque) PID regulator K_P parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V/s16A",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 7,
+    "Name" : "I_Q_KI",
+    "Description" : "I_q (Torque) PID regulator K_I parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V/(s16A.ppm)",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 8,
+    "Name" : "I_Q_KD",
+    "Description" : "I_q (Torque) PID regulator K_D parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V.ppm/s16A",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 10,
+    "Name" : "I_D_KP",
+    "Description" : "Flux (I_d) PID regulator K_P  parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V/s16A",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 11,
+    "Name" : "I_D_KI",
+    "Description" : "Flux (I_d) PID regulator K_I parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V/(s16A.ppm)",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 12,
+    "Name" : "I_D_KD",
+    "Description" : "Flux (I_d) PID regulator K_D parameter (Numerator)",
+    "Type" : "S16",
+    "Unit" : "s16V.ppm/s16A",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 22,
+    "Name" : "BUS_VOLTAGE",
+    "Description" : "Bus Voltage measurement",
+    "Type" : "U16",
+    "Unit" : "V",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency": "MediumFreq"
+},
+{
+    "Id" : 23,
+    "Name" : "HEATS_TEMP",
+    "Description" : "Heatsink temperature",
+    "Type" : "U16",
+    "Unit" : "deg",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency": "MediumFreq"
+}
+,
+{
+    "Id" : 31,
+    "Name" : "I_A",
+    "Description" : "I_a phase current measurement",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 32,
+    "Name" : "I_B",
+    "Description" : "I_b phase current measurement",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 33,
+    "Name" : "I_ALPHA_MEAS",
+    "Description" : "I_Alpha current measurement",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 34,
+    "Name" : "I_BETA_MEAS",
+    "Description" : "I_Beta current measurement",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 35,
+    "Name" : "I_Q_MEAS",
+    "Description" : "I_q current measurement (synonymous to Torque measure)",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 36,
+    "Name" : "I_D_MEAS",
+    "Description" : "I_d current measurement (synonymous to Flux measure)",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 37,
+    "Name" : "I_Q_REF",
+    "Description" : "I_q current reference (synonymous to Torque reference)",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 38,
+    "Name" : "I_D_REF",
+    "Description" : "I_d current reference (synonymous to Flux reference)",
+    "Type" : "S16",
+    "Unit" : "A",
+    "Scale": "CURRENT_SCALE",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 39,
+    "Name" : "V_Q",
+    "Description" : "V_q voltage",
+    "Type" : "S16",
+    "Unit" : "V",
+    "Scale": "VOLTAGE_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 40,
+    "Name" : "V_D",
+    "Description" : "V_d voltage",
+    "Type" : "S16",
+    "Unit" : "V",
+    "Scale": "VOLTAGE_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 41,
+    "Name" : "V_ALPHA",
+    "Description" : "V Alpha voltage",
+    "Type" : "S16",
+    "Unit" : "V",
+    "Scale": "VOLTAGE_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 42,
+    "Name" : "V_BETA",
+    "Description" : "V Beta voltage",
+    "Type" : "S16",
+    "Unit" : "V",
+    "Scale": "VOLTAGE_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 45,
+    "Name" : "STOPLL_EL_ANGLE",
+    "Description" : "Observed electrical angle (only available if State Observer + PLL is used whether as main or auxiliary speed and position \"sensor\")",
+    "Type" : "S16",
+    "Unit" : "deg",
+    "Scale": 0.005493,
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 46,
+    "Name" : "STOPLL_ROT_SPEED",
+    "Description" : "Observed mechanical rotation speed (only available if State Observer + PLL is used whether as main or auxiliary speed and position \"sensor\")",
+    "Type" : "S16",
+    "Unit" : "rpm",
+    "Scale": "FREQUENCY_SCALE",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency" : "HighFrequency"
+}
+,
+{
+    "Id" : 81,
+    "Name" : "SPEED_KP_DIV",
+    "Description" : "Speed PID regulator K_PDivisor as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "N/A",
+    "Access" : "RW",
+    "UpdateFrequency" : "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 82,
+    "Name" : "SPEED_KI_DIV",
+    "Description" : "Speed PID regulator K_IDivisor as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "N/A",
+    "Access" : "RW",
+    "UpdateFrequency" : "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 83,
+    "Name" : "SPEED_KD_DIV",
+    "Description" : "Speed PID regulator K_DDivisor as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "N/A",
+    "Access" : "RW",
+    "UpdateFrequency" : "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 84,
+    "Name" : "I_D_KP_DIV",
+    "Description" : "Divisor of the Proportional gain of the I_D current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 85,
+    "Name" : "I_D_KI_DIV",
+    "Description" : "Divisor of the Integral gain of the I_D current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 86,
+    "Name" : "I_D_KD_DIV",
+    "Description" : "Divisor of the Derivative gain of the I_D current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 87,
+    "Name" : "I_Q_KP_DIV",
+    "Description" : "Divisor of the Proportional gain of the I_Q current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 88,
+    "Name" : "I_Q_KI_DIV",
+    "Description" : "Divisor of the Integral gain of the I_Q current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 89,
+    "Name" : "I_Q_KD_DIV",
+    "Description" : "Divisor of the Derivative gain of the I_Q current regulation PID as power of 2",
+    "Type" : "U16ENUM",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset",
+    "Enum" : [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+             ]
+}
+,
+{
+    "Id" : 0,
+    "Name" : "FAULTS_FLAGS",
+    "Description" : "Faults Flags",
+    "Type" : "U32FLAGS",
+    "Unit" : "-",
+    "Scope": "Motor",
+    "Access" : "RP",
+    "UpdateFrequency": "MediumFreq",
+    "Enum" : [
+                "MC_FOC_DURATION",
+                "MC_OVER_VOLT",
+                "MC_UNDER_VOLT",
+                "MC_OVER_TEMP",
+                "MC_START_UP",
+                "MC_SPEED_FDBK",
+                "MC_BREAK_IN",
+                "MC_SW_ERROR",
+                "F_8",
+                "F_9",
+                "MC_DRV_PROTEC",
+                "F_11",
+                "F_12",
+                "F_13",
+                "F_14",
+                "F_15",
+                "MC_FOC_DURATION_NOW",
+                "MC_OVER_VOLT_NOW",
+                "MC_UNDER_VOLT_NOW",
+                "MC_OVER_TEMP_NOW",
+                "MC_START_UP_NOW",
+                "MC_SPEED_FDBK_NOW",
+                "MC_BREAK_IN_NOW",
+                "MC_SW_ERROR_NOW",
+                "F_8_NOW",
+                "F_9_NOW",
+                "MC_DRV_PROTEC_NOW"
+            ]
+}
+,
+{
+    "Id" : 1,
+    "Name" : "SPEED_MEAS",
+    "Description" : "Average Mechanical Speed measure",
+    "Type" : "S32",
+    "Unit" : "RPM",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency": "MediumFreq"
+}
+,
+{
+    "Id" : 2,
+    "Name" : "SPEED_REF",
+    "Description" : "Mechanical speed reference",
+    "Type" : "S32",
+    "Unit" : "RPM",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency": "MediumFreq"
+}
+,
+{
+    "Id" : 109,
+    "Name" : "MOTOR_POWER",
+    "Description" : "Motor power",
+    "Type" : "F32",
+    "Unit" : "W",
+    "Scope": "Motor",
+    "Access" : "R",
+    "UpdateFrequency": "MediumFreq"
+}
+,
+{
+    "Id" : 110,
+    "Name" : "ACIM_LSO_K",
+    "Description" : "ACIM 'tweakable' K of LSO (suggested is 1-1.5)",
+    "Type" : "F32",
+    "Unit" : "-",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 111,
+    "Name" : "ACIM_LSO_KP",
+    "Description" : "ACIM LSO angle integrator Kp",
+    "Type" : "F32",
+    "Unit" : "-",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id" : 112,
+    "Name" : "ACIM_LSO_KI",
+    "Description" : "ACIM LSO angle integrator Ki",
+    "Type" : "F32",
+    "Unit" : "-",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency": "Reset"
+}
+,
+{
+    "Id": 0,
+    "Name" : "FW_NAME",
+    "Description" : "Name of the Firmware",
+    "Type" : "STRING",
+    "Access" : "RC",
+    "Scope": "Global",
+    "UpdateFrequency": "NoUpdate"
+}
+,
+{
+    "Id": 1,
+    "Name" : "CTRL_STAGE_NAME",
+    "Description" : "Name of the control stage",
+    "Type" : "STRING",
+    "Access" : "RC",
+    "Scope": "Global",
+    "UpdateFrequency": "NoUpdate"
+}
+,
+{
+    "Id": 2,
+    "Name" : "PWR_STAGE_NAME",
+    "Description" : "Name of the Power stage",
+    "Type" : "STRING",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "UpdateFrequency": "NoUpdate"
+}
+,
+{
+    "Id": 3,
+    "Name" : "MOTOR_NAME",
+    "Description" : "Motor name",
+    "Type" : "STRING",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "UpdateFrequency": "NoUpdate"
+}
+,
+{
+    "Id": 0,
+    "Name" : "GLOBAL_CONFIG",
+    "Description" : "Global Configuration of the Motor Control Application",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RC",
+    "Scope": "Global",
+    "Structure": [ "U32", "U8", "U8", "U8", "U8" , "U8", "U8" ]
+},
+{
+    "Id": 1,
+    "Name" : "MOTOR_CONFIG",
+    "Description" : "Motor Parameters",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "Structure": [ "S32", "S32", "S32", "S32", "S32", "S32", "S32", "S32", "S32","STRING"]
+},
+{
+    "Id": 2,
+    "Name" : "APPLICATION_CONFIG",
+    "Description" : "Motor Parameters",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "Structure": [ "U32", "F32", "F32", "U16", "U8" , "U8"]
+},
+{
+    "Id": 3,
+    "Name" : "FOC_FW_CONFIG",
+    "Description" : "FOC specific motor drive configuration",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "Structure": [ "U8", "U8", "U8", "U8", "U32", "U16" , "U16", "U16"]
+},
+{
+    "Id": 4,
+    "Name" : "SCALES",
+    "Description" : "Currents, Voltages and Frequencies Scale factors",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RC",
+    "Scope": "Motor",
+    "Structure": ["F32","F32","F32"]
+},
+{
+    "Id": 6,
+    "Name" : "SPEED_RAMP",
+    "Description" : "Parameters of a speed ramp to apply to the motor",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RW",
+    "Scope": "Motor",
+    "Structure": [
+        "S32",
+        "U16"
+    ]
+}
+,
+{
+    "Id": 7,
+    "Name" : "TORQUE_RAMP",
+    "Description" : "Parameters of a torque ramp to apply to the motor",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RW",
+    "Scope": "Motor",
+    "Structure": [
+        "S32",
+        "U16"
+    ]
+}
+,
+{
+    "Id": 13,
+    "Name" : "CURRENT_REF",
+    "Description" : "DQ frame current reference",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RW",
+    "Scope": "Motor",
+    "Structure": [
+        "S16",
+        "S16"
+    ]
+}
+,
+{
+    "Id": 14,
+    "Name" : "POSITION_RAMP",
+    "Description" : "Parameters of a position ramp to apply to the motor",
+    "Type" : "RAWSTRUCTURE",
+    "Unit" : "",
+    "Access" : "RW",
+    "Scope": "Motor",
+    "Structure": [
+        "F32",
+        "F32"
+    ]
+}
+,
+{
+    "Id": 20,
+    "Name" : "ASYNC_UARTA",
+    "Description" : "Datalog register across UART A",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Motor",
+    "Structure": []
+}
+,
+{
+    "Id": 21,
+    "Name" : "ASYNC_UARTB",
+    "Description" : "Datalog register across UART B",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Motor",
+    "Structure": []
+}
+,
+{
+    "Id": 22,
+    "Name" : "ASYNC_STLINK",
+    "Description" : "Datalog register across STLink",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Motor",
+    "Structure": []
+}
+,
+{
+    "Id": 25,
+    "Name" : "SHIFT_UARTA",
+    "Description" : "Datalog register across UARTA",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Global",
+    "Structure": []
+}
+,
+{
+    "Id": 26,
+    "Name" : "SHIFT_UARTB",
+    "Description" : "Datalog register across UARTB",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Global",
+    "Structure": []
+}
+
+,
+{
+    "Id": 27,
+    "Name" : "SHIFT_STLINK",
+    "Description" : "Datalog register across STLink",
+    "Type" : "DYNSTRUCTURE",
+    "Unit" : "",
+    "Access" : "W",
+    "Scope": "Global",
+    "Structure": []
+}
+,
+{
+    "Id" : 18,
+    "Name" : "SC_PP",
+    "Description" : "pole pair profiler",
+    "Type" : "U8",
+    "Unit" : "",
+    "Scope": "Motor",
+    "Access" : "W",
+    "UpdateFrequency": "MediumFreq"
+}
+
+]
