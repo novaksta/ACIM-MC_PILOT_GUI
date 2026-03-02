@@ -262,6 +262,16 @@
 }
 ,
 {
+    "Id" : 107,
+    "Name" : "V_Q_REF",
+    "Description" : "voltage reference (open loop voltage)",
+    "Type" : "U16",
+    "Unit" : "%",
+    "Scope": "Motor",
+    "Access" : "RW",
+    "UpdateFrequency" : "HighFrequency"
+},
+{
     "Id" : 38,
     "Name" : "I_D_REF",
     "Description" : "I_d current reference (synonymous to Flux reference)",
